@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .surprise-button {
+            padding: 15px 30px;
+            font-size: 30px;
+            color: white;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            transition: all 0.5s;
+            left: 50%;
+            top: 150%; /* Sửa lại vị trí top để không che mất chữ */
+            transform: translate(-50%, -50%);
+        }
+
+        .surprise-button:hover {
+            background-color: #ff4433;
+        }
+
+        .secret-gift {
+            display: none;
+            margin-top: 35px;
+            animation: fadeIn 1s ease-in-out;
+            font-size: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fireworks {
+            display: none;
+            font-size: 50px;
+            margin-top: 40px;
+            animation: explode 1.5s ease-out infinite;
+        }
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chúc mừng sinh nhật!</h1>
+        <p>Hãy nhấn vào nút dưới đây để khám phá món quà bí mật của tớ! 🎁</p>
+        <button id="dynamic-button" class="surprise-button">Nhấn vào đây nè!</button>
+    
+        <div class="secret-gift">
+            <h2>🎉 Bất ngờ chưa! 🎉</h2>
+            <p>Bạn là người tuyệt vời nhất và xứng đáng với tất cả những điều tốt đẹp nhất trên thế giới này! 💖</p>
+            <img src="https://via.placeholder.com/300?text=Happy+Birthday!" alt="Happy Birthday"/> <!-- Nhớ thay ảnh phù hợp -->
+        </div>
+
+        <div class="fireworks">🎆🎇🎆</div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+        // Danh sách tên cho từng nút
+        const buttonNames = [
+            "Nhấn vào đây nè!",
+            "Nhấn tiếp đi nào!",
+            "Gần đến quà rồi!",
+            "Chưa xong đâu nha!",
+            "Thêm một lần nữa nào!",
+            "Cuối cùng rồi, nhấn đi!"
+        ];
+
+        function moveButton() {
+            const button = document.getElementById('dynamic-button');
+            const gift = document.querySelector('.secret-gift');
+
+            // Tăng biến đếm
+            clickCount++;
+
+            // Cập nhật nội dung nút
+            if (clickCount < buttonNames.length) {
+                button.innerText = buttonNames[clickCount];
+            }
+
+            // Điều chỉnh vị trí nút theo số lần nhấn
+            if (clickCount === 1) {
+                button.style.left = '10%'; // Nút chuyển sang bên trái
+                button.style.top = '50%';
+                button.style.transform = 'translateY(-50%)';
+            } else if (clickCount === 2) {
+                button.style.left = '80%'; // Nút chuyển sang bên phải
+                button.style.top = '50%';
+                button.style.transform = 'translateY(-50%)';
+            } else if (clickCount === 3) {
+                button.style.left = '50%'; // Nút quay lại giữa
+                button.style.top = '150%'; // Đẩy xuống phía dưới
+                button.style.transform = 'translate(-50%, -50%)';
+            } else if (clickCount === 4) {
+                button.style.left = '10%'; // Nút sang góc dưới bên trái
+                button.style.top = '80%';
+                button.style.transform = 'translateY(-50%)';
+            } else if (clickCount === 5) {
+                button.style.left = '70%'; // Nút sang góc dưới bên phải
+                button.style.top = '80%';
+                button.style.transform = 'translateY(-50%)';
+            } else if (clickCount === 6) {
+                // Hiển thị món quà và ẩn nút
+                button.style.display = 'none';
+                gift.style.display = 'block';
+                revealGift(); // Gọi hàm để hiển thị món quà và pháo hoa
+            }
+        }
+
+        // Gắn sự kiện click cho nút
+        document.getElementById('dynamic-button').addEventListener('click', moveButton);
+
+        // Hàm để hiển thị món quà và pháo hoa
+        function revealGift() {
+            const gift = document.querySelector('.secret-gift');
+            const fireworks = document.querySelector('.fireworks');
+
+            gift.style.display = 'block';
+            fireworks.style.display = 'block'; // Đảm bảo pháo hoa được hiển thị
+        }
+    </script>
+</body>
+</html>
